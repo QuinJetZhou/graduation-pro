@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HomeBackground/>
+    <Search/>
     <div id="nav">
       <ul class="layui-nav" lay-filter="demo">
         <li class="layui-nav-item layui-this"><router-link to="/">Home</router-link></li>
@@ -12,8 +12,7 @@
   </div>
 </template>
 <script>
-// import HomeBackground from '@/components/HomeBackground.vue'
-import HomeBackground from "@/components/HomeBackground.vue";
+import Search from "@/components/Search.vue";
 
 
 export default {
@@ -31,7 +30,7 @@ export default {
       }
       ,
       components:{
-        HomeBackground
+        Search
       }
       
 }
@@ -40,8 +39,13 @@ export default {
 </script>
 
 <style>
-@import '../public/layui-src/dist/css/layui.css';
+@import url('../public/reset.css');
+
+
+html,
 body{
+  height: 100%;
+  width: 100%;
   background: #F4F6F6;
 }
 #app {
@@ -50,7 +54,11 @@ body{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100%;
 }
+body::-webkit-scrollbar {
+        display: none;
+    }
 #nav {
   position: fixed;
   top: 0;
