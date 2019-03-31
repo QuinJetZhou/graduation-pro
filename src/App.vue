@@ -5,7 +5,9 @@
       <ul class="layui-nav" lay-filter="demo">
         <li class="layui-nav-item layui-this"><router-link to="/">Home</router-link></li>
         <li class="layui-nav-item"><router-link to="/about">About</router-link></li>
-        <li class="layui-nav-item"><a href="javascript:void(0);">社区</a></li>
+        <li class="layui-nav-item" v-on:click="fullScreen()" style="float:right"><i v-if="fullScreenClick" class="fas fa-expand"></i> <i v-else class="fas fa-compress"></i></li>
+        <li></li> 
+
       </ul>
     </div>
     <router-view/>
@@ -13,20 +15,68 @@
 </template>
 <script>
 import Search from "@/components/Search.vue";
+import { log } from 'util';
+import { constants } from 'fs';
 
 
 export default {
       data(){
         return{
-            a: 0 
+            fullScreenClick: true
         }
       },
-      created: function () {
-        console.log('a is: ' + this.a);
+      created(){
+        // 监听屏幕变化事件
+        window.addEventListener("resize", this.ifFull)
+      },
+      beforeDestroy(){
+        window.removeEventListener("resize", this.ifFull)
 
       },
       methods:{
-
+        fullScreen(){
+            if(this.fullScreenClick){
+              if(document.documentElement.RequestFullScreen){
+                document.documentElement.RequestFullScreen();
+              }
+              //兼容火狐
+              if(document.documentElement.mozRequestFullScreen){
+                document.documentElement.mozRequestFullScreen();
+              }
+              //兼容谷歌等可以webkitRequestFullScreen也可以webkitRequestFullscreen
+              if(document.documentElement.webkitRequestFullScreen){
+                document.documentElement.webkitRequestFullScreen();
+              }
+              //兼容IE,只能写msRequestFullscreen
+              if(document.documentElement.msRequestFullscreen){
+                document.documentElement.msRequestFullscreen();
+              }
+            }else{
+              if(document.exitFullScreen){
+                document.exitFullscreen()
+              }
+              //兼容火狐
+              if(document.mozCancelFullScreen){
+                document.mozCancelFullScreen()
+              }
+              //兼容谷歌等
+              if(document.webkitExitFullscreen){
+                document.webkitExitFullscreen()
+              }
+              //兼容IE
+              if(document.msExitFullscreen){
+                document.msExitFullscreen()
+              }
+            }  
+          // console.log(window.fullScreen || document.webkitIsFullScreen)  
+          this.fullScreenClick = !this.fullScreenClick;
+        },
+        ifFull(){
+          //如果为不为全屏状态，则this.fullScreenClick = true;
+          if(!(window.fullScreen || document.webkitIsFullScreen)){
+            this.fullScreenClick = true;
+          }
+        }
       }
       ,
       components:{
@@ -38,7 +88,7 @@ export default {
 
 </script>
 
-<style>
+<style lang="scss">
 @import url('../public/reset.css');
 
 
@@ -67,7 +117,9 @@ body::-webkit-scrollbar {
 }
 .layui-nav{
   background-color: rgba(57,61,73,0.3);
+
 }
+
 #nav a {
   font-weight: bold;
   color: #fff;

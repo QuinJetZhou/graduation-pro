@@ -73,9 +73,9 @@ export default {
                     background: rgba(255,255,255,0.7);
                 }
             }
-            .search-box-icon{
-                // justify-content: flex-end;
-            }
+            // .search-box-icon{
+            //     // justify-content: flex-end;
+            // }
             .layui-icon{
                     font-size: 30px;
                     display: flex;
