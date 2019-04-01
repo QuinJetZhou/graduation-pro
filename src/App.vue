@@ -3,11 +3,10 @@
     <Search/>
     <div id="nav">
       <ul class="layui-nav" lay-filter="demo">
-        <li class="layui-nav-item layui-this"><router-link to="/">Home</router-link></li>
-        <li class="layui-nav-item"><router-link to="/about">About</router-link></li>
+        <li class="layui-nav-item layui-this"><router-link to="/">图片</router-link></li>
+        <li class="layui-nav-item"><router-link to="/about">视频</router-link></li>
         <li class="layui-nav-item" v-on:click="fullScreen()" style="float:right"><i v-if="fullScreenClick" class="fas fa-expand"></i> <i v-else class="fas fa-compress"></i></li>
         <li></li> 
-
       </ul>
     </div>
     <router-view/>
@@ -27,6 +26,7 @@ export default {
       },
       created(){
         // 监听屏幕变化事件
+        
         window.addEventListener("resize", this.ifFull)
       },
       beforeDestroy(){
