@@ -1,14 +1,16 @@
 <template>
   <div class="hello">
-    <h1></h1>
     <div class="img-wrapper" v-for="(item,index) of unsplashList" :key="index">
-      <img :src="item.urls.small" alt="">
+       <!-- <a :href="downLoad" download=""> -->
+      <img :src="item.urls.small" alt="" @click="downLoadPhoto(item.links.download_location)">
+      <!-- </a> -->
       <!-- <p>{{item}}</p> -->
     </div>
   </div>
 </template>
 
 <script>
+import { log } from 'util';
 export default {
   // name: 'HelloWorld',
   // props: {
@@ -16,12 +18,17 @@ export default {
   // },
   data(){
     return{
-      unsplashList:[]
+      unsplashList:[],
+      downLoad:''
     }
   },
   created(){
     // unsplash api调用
-        this.getPhoto();
+        if(!store.get('photoList')){
+          this.getPhoto();
+        }
+        this.unsplashList = store.get('photoList');
+        store.set('user', { name:'Marcus' });
   },
   methods:{
     getPhoto(){
@@ -35,7 +42,23 @@ export default {
             console.log(response.data);
             that.unsplashList = response.data;
             console.log(that.unsplashList)
-
+            store.set('photoList',that.unsplashList)
+          })
+          .catch(function (error) {
+            console.log(error);
+        });
+    },
+    downLoadPhoto(url){
+      let that = this;
+      that.$http.get(url,{
+        params: {
+          client_id: "d46fae74f794e091ca220153b982053aeb53218e7bbf0f3e9ba9d19d9a5a6143",
+          force: true
+        }
+      }).then(function (response) {
+            console.log(response);
+            that.downLoad = response.data.url;
+            // window.location.href = downLoad;
           })
           .catch(function (error) {
             console.log(error);
@@ -46,9 +69,18 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-a {
-  color: #42b983;
+<style lang="scss" scoped>
+.hello{
+  display:flex;
+  width: 100%;
+  flex-wrap: wrap;
+  .img-wrapper{
+    // width: 400px;
+    flex: 1;
+  }
 }
+
+
 </style>
+
+

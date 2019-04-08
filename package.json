@@ -12,6 +12,7 @@
     "layui-src": "^2.4.5",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
+    "store": "^2.0.12",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
