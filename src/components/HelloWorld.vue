@@ -26,20 +26,21 @@ export default {
     // unsplash api调用
         if(!store.get('photoList')){
           this.getPhoto();
+          console.log("download")
         }
         this.unsplashList = store.get('photoList');
-        store.set('user', { name:'Marcus' });
+        // this.$bus.emit(this.getPhoto()) 
   },
   methods:{
     getPhoto(){
+          console.log(2)
       let that = this;
       that.$http.get(`https://api.unsplash.com/photos/`,{
         params: {
-          client_id: "d46fae74f794e091ca220153b982053aeb53218e7bbf0f3e9ba9d19d9a5a6143",
+          client_id: that.unsplashId,
           per_page: 30
         }
       }).then(function (response) {
-            console.log(response.data);
             that.unsplashList = response.data;
             console.log(that.unsplashList)
             store.set('photoList',that.unsplashList)
@@ -52,7 +53,7 @@ export default {
       let that = this;
       that.$http.get(url,{
         params: {
-          client_id: "d46fae74f794e091ca220153b982053aeb53218e7bbf0f3e9ba9d19d9a5a6143",
+          client_id: that.unsplashId,
           force: true
         }
       }).then(function (response) {

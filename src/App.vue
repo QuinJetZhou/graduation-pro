@@ -5,8 +5,8 @@
       <ul class="layui-nav" lay-filter="demo">
         <li class="layui-nav-item layui-this"><router-link to="/">图片</router-link></li>
         <li class="layui-nav-item"><router-link to="/about">视频</router-link></li>
-        <li class="layui-nav-item" v-on:click="fullScreen()" style="float:right"><i v-if="fullScreenClick" class="fas fa-expand"></i> <i v-else class="fas fa-compress"></i></li>
-        <li></li> 
+        <li class="layui-nav-item" v-on:click="fullScreen()"><i v-if="fullScreenClick" class="fas fa-expand"></i> <i v-else class="fas fa-compress"></i></li>
+        <li class="layui-nav-item" @click="refreshPhoto()"><i class="fas fa-redo"></i></li> 
       </ul>
     </div>
     <router-view/>
@@ -76,6 +76,10 @@ export default {
           if(!(window.fullScreen || document.webkitIsFullScreen)){
             this.fullScreenClick = true;
           }
+        },
+        refreshPhoto(){
+          // this.$bus.on(this.getPhoto())
+          console.log(1)
         }
       }
       ,
@@ -117,7 +121,11 @@ body::-webkit-scrollbar {
 }
 .layui-nav{
   background-color: rgba(57,61,73,0.3);
-
+  li:nth-child(3),
+  li:nth-child(4){
+    float:right;
+    width: 30px;
+  }
 }
 
 #nav a {

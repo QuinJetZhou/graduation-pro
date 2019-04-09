@@ -2,7 +2,7 @@
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <HelloWorld />
+    <HelloWorld ref="myHelloWorld"/>
     <!-- <HomeBackground/> -->
   </div>
 </template>
@@ -16,6 +16,11 @@ export default {
   components: {
     HelloWorld
     // HomeBackground
+  },
+  methods:{
+    // refreshPhoto(){
+    //   this.$refs.myHelloWorld.getPhoto;
+    // }
   }
 }
 </script>
