@@ -1,6 +1,7 @@
 <template>
-    <div class="background">
-        <!-- <img src="../assets/img/marion-michele-277282-unsplash.jpg" alt=""> -->
+    <!-- <div class="background" > -->
+    <div class="background" :style="{backgroundImage: 'url(' +backUrl+ ')' }">
+        <!-- <img :src="backUrl" alt=""> -->
         <div class="layui-row">
             <div class="layui-col-xs2 layui-col-sm2 layui-col-md1  search-box-icon">
                 <i class="layui-icon layui-icon-search "></i>
@@ -26,6 +27,24 @@
 <script>
 export default {
     // name:'HomeBackground'
+    data () {
+        return {
+            unsplashList:{},
+            photoList:[],
+            backUrl:''
+            
+        }
+    },
+    created: function () { 
+        this.unsplashList = store.get('photoList')
+        for(let item of this.unsplashList){
+            this.photoList.push(item.urls.regular);//把图片链接放到一个数组
+        }
+        console.log(this.photoList);
+        this.backUrl = this.photoList[Math.floor(Math.random()*this.photoList.length)]//从数组里随机选一个链接
+        console.log(this.backUrl);
+        
+     }
 }
 </script>
 <style  lang="scss" >
@@ -35,8 +54,8 @@ export default {
         overflow: hidden;
         align-items: center;
         display: flex;
-        background: url('../assets/img/aeroplane-aircraft-airplane-1465904.jpg');
-        background-size: cover;
+        // background: url('../assets/img/aeroplane-aircraft-airplane-1465904.jpg');
+        background-size: 100%;
         background-repeat: no-repeat;
         background-position: 50%;
         .layui-row{

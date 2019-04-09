@@ -120,7 +120,7 @@ body::-webkit-scrollbar {
   
 }
 .layui-nav{
-  background-color: rgba(57,61,73,0.3);
+  background-color: rgba(57,61,73,0.5);
   li:nth-child(3),
   li:nth-child(4){
     float:right;
