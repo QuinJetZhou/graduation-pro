@@ -3,6 +3,7 @@
     <Search/>
     <div id="nav">
       <ul class="layui-nav" lay-filter="demo">
+        <li class="layui-nav-item"><router-link to="/login">登录</router-link></li>
         <li class="layui-nav-item layui-this"><router-link to="/">图片</router-link></li>
         <li class="layui-nav-item"><router-link to="/about">视频</router-link></li>
         <li class="layui-nav-item" v-on:click="fullScreen()"><i v-if="fullScreenClick" class="fas fa-expand"></i> <i v-else class="fas fa-compress"></i></li>
@@ -121,8 +122,8 @@ body::-webkit-scrollbar {
 }
 .layui-nav{
   background-color: rgba(57,61,73,0.5);
-  li:nth-child(3),
-  li:nth-child(4){
+  li:nth-child(4),
+  li:nth-child(5){
     float:right;
     width: 30px;
   }

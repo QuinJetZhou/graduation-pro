@@ -1,7 +1,6 @@
 <template>
     <!-- <div class="background" > -->
-    <div class="background" :style="{backgroundImage: 'url(' +backUrl+ ')' }">
-        <!-- <img :src="backUrl" alt=""> -->
+    <div class="main">    
         <div class="layui-row">
             <div class="layui-col-xs2 layui-col-sm2 layui-col-md1  search-box-icon">
                 <i class="layui-icon layui-icon-search "></i>
@@ -14,12 +13,9 @@
             <div class="layui-col-xs2 layui-col-sm2 layui-col-md1  search-box-icon-enter">
                 <i class="layui-icon layui-icon-return "></i>
             </div>
-            <!-- <div class="layui-col-xs4 layui-col-sm7 layui-col-md8 layui-bg-blue">
-            移动：4/12 | 平板：7/12 | 桌面：8/12
-            </div>
-            <div class="layui-col-xs4 layui-col-sm5 layui-col-md4 layui-bg-orange">
-            移动：4/12 | 平板：5/12 | 桌面：4/12
-            </div> -->
+        </div>
+        <div class="background" :style="{backgroundImage: 'url(' +backUrl+ ')' }">
+            <!-- <img :src="backUrl" alt=""> -->
         </div>
     </div>
 </template>
@@ -47,23 +43,23 @@ export default {
      }
 }
 </script>
-<style  lang="scss" >
-    .background{
+<style  lang="scss" scope>
+    .main{
         width: 100%;
         height: 50%;
         overflow: hidden;
         align-items: center;
         display: flex;
-        // background: url('../assets/img/aeroplane-aircraft-airplane-1465904.jpg');
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-position: 50%;
-        .layui-row{
+         .layui-row{
             width: 90%;
             margin: 0 auto;
             height: 50px;
             border: 2px solid rgba(255,255,255,0.7);
             border-radius: 10px;
+            z-index: 9;
+            position: absolute;
+            left: 0;
+            right: 0;
             .search-box{
                 display: flex;
                 height: 100%;
@@ -102,5 +98,26 @@ export default {
                 }
 
         }
+    .background{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        align-items: center;
+        display: flex;
+        // background: url('../assets/img/aeroplane-aircraft-airplane-1465904.jpg');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: 50%;
+        animation: expand 10s linear infinite alternate;
+       
     }
+    }
+@keyframes expand{
+    // 0%{background-position: 50% 50%;background-size: 100%}
+    // 50%{background-position: 50% 52.5%}
+    // 100%{background-position: 50% 55%;background-size: 105%}
+    0%{transform:scale(1)}
+    100%{transform:scale(1.1)}
+}    
 </style>
