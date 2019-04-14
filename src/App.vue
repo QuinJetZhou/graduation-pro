@@ -27,7 +27,9 @@ export default {
       },
       created(){
         // 监听屏幕变化事件
-        
+          layui.use('element', function(){
+            var element = layui.element;
+          });
         window.addEventListener("resize", this.ifFull)
       },
       beforeDestroy(){
@@ -102,6 +104,7 @@ body{
   height: 100%;
   width: 100%;
   background: #F4F6F6;
+  font: 14px Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -118,7 +121,7 @@ body::-webkit-scrollbar {
   position: fixed;
   top: 0;
   width: 100%;
-  
+  z-index: 999;
 }
 .layui-nav{
   background-color: rgba(57,61,73,0.5);
