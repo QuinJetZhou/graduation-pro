@@ -121,6 +121,7 @@ export default {
       margin: 10px;
       transition: all 0.3s;
       img{
+      width: 100%;  
       border-radius: 10px;
       box-shadow: 5px 5px 10px #999;
       cursor: pointer;
@@ -130,12 +131,10 @@ export default {
       }
       &-infomation{
         height: 50px;
-        width: 400px;
+        width: 100%;
         position: relative;
         bottom: 52px;
         background-color: rgba(255,255,255,0.5);
-        left: 50%;
-        margin-left: -200px;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
         display: flex;

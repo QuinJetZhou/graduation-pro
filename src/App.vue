@@ -26,10 +26,7 @@ export default {
         }
       },
       created(){
-        // 监听屏幕变化事件
-          layui.use('element', function(){
-            var element = layui.element;
-          });
+
         window.addEventListener("resize", this.ifFull)
       },
       beforeDestroy(){
