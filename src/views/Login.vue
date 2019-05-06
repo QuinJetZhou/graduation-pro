@@ -3,10 +3,10 @@
          <div class="video-container">
             <div :style="fixStyle" class="filter"></div>
             <video :style="fixStyle" autoplay loop class="fillWidth" v-on:canplay="canplay">
-                <source src="../assets/Slow-Fire/Slow-Fire.mp4" type="video/mp4"/>
+                <source src="../assets/MP4/Tropical.mp4" type="video/mp4"/>
             </video>
             <div class="poster hidden" v-if="!vedioCanPlay">
-                <img :style="fixStyle" src="../assets/Slow-Fire/Slow-Fire.jpg" alt="">
+                <img :style="fixStyle" src="../assets/Snapshots/Tropical.jpg" alt="">
             </div>
         </div>
         <div class="login-back">
@@ -160,7 +160,7 @@ export default {
   .video-container .filter {
     z-index: 99;
     position: absolute;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.5);
   }
 
   .login-back{
