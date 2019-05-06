@@ -71,7 +71,6 @@ export default {
       }
     },
     getPhoto(){
-          console.log(2)
       let that = this;
       that.$http.get(`https://api.unsplash.com/photos/`,{
         params: {

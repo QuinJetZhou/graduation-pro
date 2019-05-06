@@ -53,17 +53,18 @@
                       </div>  
                 </form> 
               </transition>
-
+            <div class="layui-row">
+                <input type="button" v-bind:value="isRegist ? registText:loginText" @click="isRegist = !isRegist" class="layui-btn layui-col-md2 layui-col-md-offset8 button-back">  
+              </div> 
             </div> 
 
-              <div class="layui-row">
-                <input type="button" v-bind:value="isRegist ? registText:loginText" @click="isRegist = !isRegist" class="layui-btn layui-col-md2 layui-col-md-offset8 button-back">  
-              </div>   
+                
         </div>    
     </div>
 </template>
 
 <script>
+import { log } from 'util';
 export default {
     name: 'login',
     data() {
@@ -82,6 +83,17 @@ export default {
     methods: {
       canplay() {
         this.vedioCanPlay = true
+      },
+      login() {
+        if (!(/^1[34578]\d{9}$/.test(this.account))) {
+          layer.msg("请输入登录手机号码");
+					return;
+				}
+				if (this.password.length < 6) {
+          layer.msg("密码最短为 6 个字符");
+					return;
+        }
+        
       }
     },
     mounted: function() {
@@ -117,6 +129,7 @@ export default {
         var form = layui.form;
         //监听提交
         form.on('submit(formDemo)', function(data){
+          console.log(data)
           layer.msg(JSON.stringify(data.field));
           return false;
         });
@@ -154,8 +167,10 @@ export default {
     position: absolute;
     left: 50%;
     top: 50%;
-    height: 40%;
+    // height: 50%;
     transform: translate(-50%, -50%);
+    border: 1px solid #fff;
+    border-radius: 5px;
     width: 35%;
     text-align: center;
     z-index: 999;
@@ -186,13 +201,11 @@ export default {
         height: 100%;
         // background-color: rgba(255,255,255,.7);
         border-radius: 10px;
-        padding: 5% 10% 10%;
+        padding: 5% 10%;
         .input-backcolor{
-          background-color: rgba(0, 0, 0, 0.3);
+          background-color: rgba(0, 0, 0, 0.9);
           color: rgba(255,255,255,1);
           border-radius: 5px;
-          border-width: 1px;
-          border-style: solid;
           .layui-input{
           border-bottom-right-radius: 5px;
           border-top-right-radius: 5px;
@@ -205,9 +218,8 @@ export default {
         }
     }
     .button-back{
+      width: 100px;
       background: rgba(0,0,0,.6);
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.8);
     }
     .regist-container{
       background: #fff;

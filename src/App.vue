@@ -129,15 +129,6 @@ body::-webkit-scrollbar {
   }
 }
 
-#nav a {
-  font-weight: bold;
-  color: #fff;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-
 image{
   width: 400px;
 }
