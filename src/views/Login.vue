@@ -23,12 +23,12 @@
                       <div class="layui-row layui-form-item layui-col-md10 layui-col-md-offset1 input-backcolor">
                         <label class="layui-form-label">密码:</label>
                         <div class="layui-input-block">
-                          <input class="layui-input" placeholder="密码" name="password" autocomplete="off" type="password" required  lay-verify="required">
+                          <input class="layui-input" placeholder="密码" name="password" v-model="password" autocomplete="off" type="password" required  lay-verify="required">
                         </div>
                       </div>
                       <div class="layui-row layui-form-item layui-col-md10 layui-col-md-offset1">
                         <div class="">
-                          <input class="layui-btn layui-bg-orange layui-col-md4 layui-col-md-offset4" type="button" lay-submit lay-filter="formDemo"  value="登录">
+                          <input class="layui-btn layui-bg-orange layui-col-md4 layui-col-md-offset4" type="button" @click="login()" lay-submit lay-filter="formDemo1"  value="登录">
                         </div>
                       </div>    
                 </form> 
@@ -48,7 +48,7 @@
                       </div>
                       <div class="layui-row layui-form-item layui-col-md10 layui-col-md-offset1">
                         <div class="">
-                          <input class="layui-btn layui-bg-green layui-col-md4 layui-col-md-offset4" type="button" lay-submit lay-filter="formDemo" value="注册">
+                          <input class="layui-btn layui-bg-green layui-col-md4 layui-col-md-offset4" type="button" @click="regist()"  lay-submit lay-filter="formDemo2" value="注册">
                         </div>
                       </div>  
                 </form> 
@@ -74,15 +74,36 @@ export default {
         isRegist: false,
         loginText: '注册',
         registText: '返回登录',
-        account:'',
-        password:'',
-        registAccount:'',
-        registPassword:''
+        account: '',
+        password: '',
+        registAccount: '',
+        registPassword: ''
+      }
+    },
+    watch:{
+      account(e){
+        console.log(e)
+      },
+      password(e){
+        console.log(e)
       }
     },
     methods: {
       canplay() {
         this.vedioCanPlay = true
+      },
+      regist(){
+        if (!(/^1[34578]\d{9}$/.test(this.registAccount))) {
+          layer.msg("请使用手机号码注册");
+					return;
+				}
+				if (this.registPassword.length < 6) {
+          layer.msg("密码最短为 6 个字符");
+					return;
+        }
+        console.log(this.registAccount +" "+ this.registPassword)
+        this.isRegist = false;
+        layer.msg("注册成功!");
       },
       login() {
         if (!(/^1[34578]\d{9}$/.test(this.account))) {
@@ -93,7 +114,19 @@ export default {
           layer.msg("密码最短为 6 个字符");
 					return;
         }
-        
+        if (this.registAccount == this.account && this.password == this.registPassword){
+          layui.use('form', () => {
+          var form = layui.form;
+          //监听提交
+          form.on('submit(formDemo1)', (data)=>{
+                layer.msg("登录成功!");
+                this.$router.push({name:'home'})
+            });
+          });
+          console.log(1)
+        }else{
+          layer.msg("账号密码错误!");
+        }
       }
     },
     mounted: function() {
@@ -125,15 +158,24 @@ export default {
       }
       window.onresize()
 
-      layui.use('form', function(){
-        var form = layui.form;
-        //监听提交
-        form.on('submit(formDemo)', function(data){
-          console.log(data)
-          layer.msg(JSON.stringify(data.field));
-          return false;
-        });
-      });
+      // layui.use('form', function(){
+      //   var form = layui.form;
+      //   //监听提交
+      //   form.on('submit(formDemo)', function(data){
+      //     console.log(data)
+      //       layer.msg(JSON.stringify(data.field));
+      //       if(!(/^1[34578]\d{9}$/.test(data.field.account))) {
+      //         layer.msg("请输入登录手机号码");
+      //         console.log(1)
+      //         return;
+      //       }
+      //       if (data.field.length < 6) {
+      //         layer.msg("密码最短为 6 个字符");
+      //         console.log(2)
+      //         return;
+      //       }
+      //   });
+      // });
     }
 
 }

@@ -3,8 +3,9 @@
     <div v-if="isView" class="main-wrapper">
       <div class="img-wrapper"  v-for="(item,index) of unsplashList" :key="index">
         <!-- <a :href="downLoad" download=""> -->
-        <img :src="item.urls.small" alt="" @click="downLoadPhoto(item.links.download_location)">
+        <img :src="item.urls.small" alt="">
         <div class="img-wrapper-infomation">
+        <a class="downLoad" title="Download photo" :href="downLoadPhoto(item.links.download)" rel="nofollow" download="" target="_blank" ></a>
           <span class="img-wrapper-infomation-name">作者 {{item.user.first_name}}</span><br>
           <span class="img-wrapper-infomation-date">日期 {{item.created_at}}</span><br>
           <span class="img-wrapper-infomation-home">主页  <a :href="item.user.portfolio_url">{{item.user.portfolio_url}}</a>  </span>
@@ -87,22 +88,9 @@ export default {
         });
     },
     downLoadPhoto(url){
-      let that = this;
-      that.$http.get(url,{
-        params: {
-          client_id: that.unsplashId,
-          force: true
-        }
-      }).then(function (response) {
-            console.log(response);
-            that.downLoad = response.data.url;
-            var open = " "  //先声明open 为 “”，，这样window.open()方法就能找到并下载。
-		        window.open(response.data.url)
-            // window.location.href = downLoad;
-          })
-          .catch(function (error) {
-            console.log(error);
-        });
+      // "https://unsplash.com/photos/gqOVZDJUddw/download?force=true"
+      console.log(url)
+      return url+'?force=true'
     }
   }
 }
@@ -124,6 +112,12 @@ export default {
       border-radius: 10px;
       box-shadow: 5px 5px 10px #999;
       cursor: pointer;
+      }
+      .downLoad{
+        display: inline-block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
       }
       &:hover{
           transform: scale(1.03);
